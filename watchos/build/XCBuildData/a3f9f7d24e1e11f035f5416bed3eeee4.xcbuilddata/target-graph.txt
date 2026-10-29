@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+Target 'WatchNotify' in project 'WatchNotify'
+➜ Explicit dependency on target 'WatchNotify Watch App' in project 'WatchNotify'
+Target 'WatchNotify Watch App' in project 'WatchNotify'
+➜ Explicit dependency on target 'WatchNotifyWidgetExtension' in project 'WatchNotify'
+Target 'WatchNotifyWidgetExtension' in project 'WatchNotify' (no dependencies)

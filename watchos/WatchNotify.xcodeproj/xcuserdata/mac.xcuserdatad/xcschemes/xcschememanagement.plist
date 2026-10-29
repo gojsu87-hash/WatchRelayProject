@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>SimpleComplicationExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>SimpleWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>WatchNotifyWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Widget Extension TargetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0463EDD52F9900CC00AF1BC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0463EDDB2F9900CC00AF1BC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0463EDEA2F9900CE00AF1BC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0463EDF42F9900CE00AF1BC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>049722152FA23F1C003A0177</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>04B2EB462FA82D9C009A32C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

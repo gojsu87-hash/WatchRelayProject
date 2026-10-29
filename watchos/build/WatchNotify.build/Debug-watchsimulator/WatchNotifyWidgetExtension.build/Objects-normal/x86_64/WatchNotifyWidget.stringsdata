@@ -1,0 +1,40 @@
+{
+  "source": "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotifyWidget/WatchNotifyWidget.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "알림",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 53
+        }
+      },
+      {
+        "comment": "",
+        "key": "알림",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "WatchNotify",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 82
+        }
+      },
+      {
+        "comment": "",
+        "key": "알림 상태 확인",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 83
+        }
+      }
+    ]
+  },
+  "version": 1
+}

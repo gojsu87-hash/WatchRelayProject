@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:text="WatchNotify"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상태 확인 중..."
+            android:textSize="11sp"
+            android:padding="8dp"
+            android:background="#F5F5F5"
+            android:layout_marginBottom="6dp"/>
+
+        <Button
+            android:id="@+id/btnLog"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="4dp"
+            android:backgroundTint="#607D8B"
+            android:text="📋 연결 로그 보기"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="🚀 서비스 시작"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="⛔ 서비스 중지"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <Button
+            android:id="@+id/btnNotificationAccess"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="🔔 알림 접근 권한 설정"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <Button
+            android:id="@+id/btnModeToggle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="BLE 모드 (API로 전환)"
+            android:textSize="12sp"
+            android:backgroundTint="#4A90D9"
+            android:layout_marginBottom="4dp"/>
+
+        <Button
+            android:id="@+id/btnTest"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="🧪 테스트 알림 전송"
+            android:textSize="12sp"
+            android:backgroundTint="#FF6B35"/>
+
+    </LinearLayout>
+
+</ScrollView>

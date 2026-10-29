@@ -1,0 +1,24 @@
+{
+  "source": "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 19
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 154
+        }
+      }
+    ]
+  },
+  "version": 1
+}

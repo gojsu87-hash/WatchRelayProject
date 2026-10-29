@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>colors</key>
+	<array/>
+	<key>images</key>
+	<array>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconCall</string>
+			<key>relativePath</key>
+			<string>./icon_call.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconCall</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconDef</string>
+			<key>relativePath</key>
+			<string>./icon_def.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconDef</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconDg</string>
+			<key>relativePath</key>
+			<string>./icon_dg.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconDg</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconGgcard</string>
+			<key>relativePath</key>
+			<string>./icon_ggcard.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconGgcard</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconHana</string>
+			<key>relativePath</key>
+			<string>./icon_hana.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconHana</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconKakao</string>
+			<key>relativePath</key>
+			<string>./icon_kakao.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconKakao</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconKb</string>
+			<key>relativePath</key>
+			<string>./icon_kb.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconKb</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconKona</string>
+			<key>relativePath</key>
+			<string>./icon_kona.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconKona</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconMessage</string>
+			<key>relativePath</key>
+			<string>./icon_message.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconMessage</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconNaver</string>
+			<key>relativePath</key>
+			<string>./icon_naver.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconNaver</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconSh</string>
+			<key>relativePath</key>
+			<string>./icon_sh.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconSh</string>
+		</dict>
+		<dict>
+			<key>catalogPath</key>
+			<string>/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/Assets.xcassets</string>
+			<key>objcSymbol</key>
+			<string>ACImageNameIconTeams</string>
+			<key>relativePath</key>
+			<string>./icon_teams.imageset</string>
+			<key>swiftSymbol</key>
+			<string>iconTeams</string>
+		</dict>
+	</array>
+	<key>symbols</key>
+	<array/>
+</dict>
+</plist>

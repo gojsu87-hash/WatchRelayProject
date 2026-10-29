@@ -1,0 +1,12 @@
+# 메인 폴더로 이동 (폴더 위치에 맞게 조정)
+cd ~/Desktop/WatchRelayProject
+
+# Git 초기화 및 파일 등록
+git init
+git add .
+git commit -m "Initial commit: Monorepo for Android and watchOS"
+
+# GitHub 주소 연결 및 푸시 (your-github-url 부분은 본인 깃허브 주소로 변경)
+git branch -M main
+git remote add origin https://github.com/본인계정명/WatchRelayProject.git
+git push -u origin main

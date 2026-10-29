@@ -1,0 +1,59 @@
+{
+  "" : {
+    "diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotify Watch App-primary.dia",
+    "emit-module-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotify Watch App-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotify Watch App-primary-emit-module.dia",
+    "pch" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotify Watch App-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotify Watch App-primary.swiftdeps"
+  },
+  "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/BLECentralManager.swift" : {
+    "const-values" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.d",
+    "diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.dia",
+    "index-unit-output-path" : "/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.o",
+    "llvm-bc" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.bc",
+    "object" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.o",
+    "swift-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/BLECentralManager~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/ContentView.swift" : {
+    "const-values" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/MessageStore.swift" : {
+    "const-values" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.d",
+    "diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.dia",
+    "index-unit-output-path" : "/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.o",
+    "llvm-bc" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.bc",
+    "object" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.o",
+    "swift-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/MessageStore~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/WatchNotify Watch App/WatchNotifyApp.swift" : {
+    "const-values" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.d",
+    "diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.dia",
+    "index-unit-output-path" : "/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.o",
+    "llvm-bc" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.bc",
+    "object" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.o",
+    "swift-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/WatchNotifyApp~partial.swiftmodule"
+  },
+  "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/mac/Desktop/무제 폴더/xcode_5_14_v/build/WatchNotify.build/Debug-iphonesimulator/WatchNotify Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}
