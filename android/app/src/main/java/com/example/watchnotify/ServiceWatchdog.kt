@@ -48,6 +48,11 @@ class ServiceWatchdog : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
+        if (!AppSettings.isServiceEnabled(context)) {
+            cancel(context)
+            return
+        }
+
         if (!BleService.isRunning) {
             Log.d(TAG, "서비스 미실행 → 재시작")
             try {

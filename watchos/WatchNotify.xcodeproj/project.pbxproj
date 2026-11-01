@@ -85,6 +85,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				"WatchNotify Debug Info.plist",
 			);
 			target = 0463EDDB2F9900CC00AF1BC0 /* WatchNotify Watch App */;
 		};
@@ -574,13 +575,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "WatchNotify Watch App/WatchNotify Watch App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "WatchNotify Watch App/WatchNotify Debug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 87GVZ9R62R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "WatchNotify Watch App/Info.plist";
+				INFOPLIST_FILE = "WatchNotify Watch App/WatchNotify Debug Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchNotify;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "애플워치 알림 수신을 위해 블루투스가 필요합니다";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="screen_background">#FF212121</color>
+    <color name="card_background">#FF2F2F2F</color>
+    <color name="card_outline">#FF454545</color>
+    <color name="primary_text">#FFF3F3F3</color>
+    <color name="secondary_text">#FFB4B4B4</color>
+    <color name="button_filled">#FFF3F3F3</color>
+    <color name="button_filled_text">#FF202123</color>
+    <color name="status_green">#FF4ADE80</color>
+    <color name="status_red">#FFF87171</color>
+    <color name="status_warning">#FFFBBF24</color>
+    <color name="status_neutral">#FF9B9B9B</color>
+</resources>

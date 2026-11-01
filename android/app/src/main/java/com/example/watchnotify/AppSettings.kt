@@ -6,6 +6,7 @@ object AppSettings {
 
     private const val PREF_NAME = "watchnotify_settings"
     private const val KEY_MODE = "notification_mode"
+    private const val KEY_SERVICE_ENABLED = "service_enabled"
 
     const val MODE_BLE = "BLE"
     const val MODE_API = "API"
@@ -19,6 +20,18 @@ object AppSettings {
         context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             .edit()
             .putString(KEY_MODE, mode)
+            .apply()
+    }
+
+    fun isServiceEnabled(context: Context): Boolean {
+        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            .getBoolean(KEY_SERVICE_ENABLED, true)
+    }
+
+    fun setServiceEnabled(context: Context, enabled: Boolean) {
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean(KEY_SERVICE_ENABLED, enabled)
             .apply()
     }
 

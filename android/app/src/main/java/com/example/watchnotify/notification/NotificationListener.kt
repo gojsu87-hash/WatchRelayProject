@@ -1,29 +1,28 @@
 package com.example.watchnotify.notification
 
 import android.app.Notification
-import android.content.BroadcastReceiver
 import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import android.telephony.TelephonyManager
 import android.util.Log
 import com.example.watchnotify.AppSettings
 import com.example.watchnotify.ble.BleManager
+import com.example.watchnotify.ble.BleService
 import com.example.watchnotify.db.AppDatabase
 import com.example.watchnotify.db.NotificationEntity
 import com.example.watchnotify.telegram.TelegramManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class NotificationListener : NotificationListenerService() {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    private val notificationDispatcher = Dispatchers.IO.limitedParallelism(1)
 
     // 최근 수신 메시지 추적 (중복 방지)
     private data class RecentMessage(val key: String, val timestamp: Long)
@@ -57,69 +56,8 @@ class NotificationListener : NotificationListenerService() {
         "com.microsoft.teams"
     )
 
-    @Volatile private var isOutgoingCall = false
-    @Volatile private var isRinging = false
-    @Volatile private var isInCall = false
-
-    private val phoneStateReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            when (intent.action) {
-                TelephonyManager.ACTION_PHONE_STATE_CHANGED -> {
-                    val state = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
-                    when (state) {
-                        TelephonyManager.EXTRA_STATE_RINGING -> {
-                            isOutgoingCall = false
-                            isRinging = true
-                            isInCall = false
-                            Log.d(TAG, "수신 전화 감지")
-                        }
-                        TelephonyManager.EXTRA_STATE_OFFHOOK -> {
-                            if (isRinging) {
-                                isRinging = false
-                                isInCall = true
-                                isOutgoingCall = false
-                                sendBleSignal("CALL_ANSWERED")
-                                Log.d(TAG, "수신 전화 연결됨 → CALL_ANSWERED")
-                            } else {
-                                isOutgoingCall = true
-                                isRinging = false
-                                isInCall = false
-                                Log.d(TAG, "발신 전화 감지 (워치 전송 제외)")
-                            }
-                        }
-                        TelephonyManager.EXTRA_STATE_IDLE -> {
-                            val wasInCall = isInCall
-                            val wasRinging = isRinging
-                            val wasOutgoing = isOutgoingCall
-
-                            isOutgoingCall = false
-                            isRinging = false
-                            isInCall = false
-                            callStartTime = 0
-
-                            // 수신 전화였을 때만 통화종료/부재중 신호 전송
-                            if (!wasOutgoing) {
-                                when {
-                                    wasInCall  -> sendBleSignal("CANCEL_CALL")
-                                    wasRinging -> sendBleSignal("MISSED_CALL")
-                                }
-                            }
-                            Log.d(TAG, "통화 종료 (wasOutgoing=$wasOutgoing)")
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private var callStartTime: Long = 0
-
     override fun onCreate() {
         super.onCreate()
-        val filter = IntentFilter().apply {
-            addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED)
-        }
-        registerReceiver(phoneStateReceiver, filter)
         Log.d(TAG, "알림 리스너 시작됨")
     }
 
@@ -136,7 +74,6 @@ class NotificationListener : NotificationListenerService() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(phoneStateReceiver)
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
@@ -190,17 +127,19 @@ class NotificationListener : NotificationListenerService() {
 
         // 📞 유플러스 익시오 수신 전화만 허용 (발신/통화중 차단)
         if (packageName == "com.lguplus.aicallagent" || packageName == "com.uplus.ubizai") {
-            val isIncomingCall = (text.contains("수신 전화") || title.contains("수신 전화") || text.contains("전화 왔음")) && !isOutgoingCall && !isInCall
+            val isIncomingCall =
+                (text.contains("수신 전화") || title.contains("수신 전화") || text.contains("전화 왔음")) &&
+                    BleService.isRinging && !BleService.isOutgoingCall && !BleService.isInCall
             val isOutgoingText = text.contains("발신") || title.contains("발신") || text.contains("통화 중") || title.contains("통화 중")
 
-            if (isOutgoingText || isOutgoingCall) {
+            if (isOutgoingText || BleService.isOutgoingCall) {
                 Log.d(TAG, "익시오 발신 전화 알림 차단: $title / $text")
                 return
             }
 
-            if (isIncomingCall && callStartTime == 0L) {
-                callStartTime = System.currentTimeMillis()
-                scope.launch {
+            if (isIncomingCall && !BleService.callNotificationSent) {
+                BleService.callNotificationSent = true
+                scope.launch(notificationDispatcher) {
                     val id = saveToDatabase(packageName, title, text)
                     sendNotification(id, packageName, title, text, subText)
                 }
@@ -213,7 +152,7 @@ class NotificationListener : NotificationListenerService() {
         Log.d(TAG, "알림 감지! 앱: $packageName | 제목: $title | 내용: $text")
         BleManager.getInstance(applicationContext).saveLog("📩 알림 감지: [$packageName] $title - $text")
 
-        scope.launch {
+        scope.launch(notificationDispatcher) {
             val id = saveToDatabase(packageName, title, text)
             sendNotification(id, packageName, title, text, subText)
         }
@@ -271,33 +210,113 @@ class NotificationListener : NotificationListenerService() {
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
     }
 
-    private fun sendNotification(
+    private suspend fun sendNotification(
         id: Long,
         packageName: String,
         title: String,
         text: String,
         subText: String = ""
     ) {
-        if (id < 0) return
+        if (id < 0) {
+            Log.e(TAG, "알림 DB 저장 실패; 실시간 전달을 계속합니다: $packageName | $title")
+        }
         when (AppSettings.getMode(applicationContext)) {
-            AppSettings.MODE_BLE -> try {
-                BleManager.getInstance(applicationContext)
-                    .sendNotification(id, packageName, title, text)
-            } catch (e: Exception) {
-                Log.e(TAG, "BLE 전송 오류: ${e.message}")
+            AppSettings.MODE_BLE -> {
+                val bleManager = BleManager.getInstance(applicationContext)
+                if (id <= 0L) {
+                    Log.e(TAG, "알림을 저장하지 못해 BLE ACK를 추적할 수 없습니다; API로 전달합니다")
+                    scope.launch { sendViaApi(packageName, title, text, subText) }
+                } else if (!bleManager.isWatchResponsive) {
+                    Log.w(TAG, "워치 응답 불가; 즉시 API 우회: $title")
+                    scope.launch { sendApiFallback(id, packageName, title, text, subText) }
+                } else {
+                    try {
+                        bleManager.sendNotification(id, packageName, title, text)
+                        scope.launch {
+                            delay(API_FALLBACK_ACK_TIMEOUT_MS)
+                            sendApiFallback(id, packageName, title, text, subText)
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "BLE 전송 오류; API 우회: $title", e)
+                        scope.launch { sendApiFallback(id, packageName, title, text, subText) }
+                    }
+                }
             }
-            AppSettings.MODE_API ->
-                TelegramManager.getInstance(applicationContext)
-                    .sendNotification(packageName, title, text, subText)
+            AppSettings.MODE_API -> scope.launch {
+                if (sendViaApi(packageName, title, text, subText)) {
+                    markApiDelivered(id)
+                }
+            }
         }
     }
 
-    private fun sendBleSignal(signal: String) {
-        try {
-            BleManager.getInstance(applicationContext).sendSignal(signal)
+    private suspend fun sendApiFallback(
+        id: Long,
+        packageName: String,
+        title: String,
+        text: String,
+        subText: String
+    ) {
+        val dao = try {
+            AppDatabase.getInstance(applicationContext).notificationDao()
         } catch (e: Exception) {
-            Log.e(TAG, "BLE 신호 오류: ${e.message}")
+            Log.e(TAG, "API 우회 상태 조회 실패; 중복 방지 없이 전달 시도", e)
+            sendViaApi(packageName, title, text, subText)
+            return
         }
+        val boundedId = id.coerceIn(1L, Int.MAX_VALUE.toLong()).toInt()
+        repeat(API_FALLBACK_ATTEMPTS) { attempt ->
+            val claimed = try {
+                dao.claimApiFallback(boundedId)
+            } catch (e: Exception) {
+                Log.e(TAG, "API 우회 상태 기록 실패; 전달을 시도합니다 (id=$id)", e)
+                sendViaApi(packageName, title, text, subText)
+                return
+            }
+            if (claimed == 0) {
+                Log.d(TAG, "API 우회 불필요: 이미 ACK되었거나 우회 처리됨 (id=$id)")
+                return
+            }
+            if (sendViaApi(packageName, title, text, subText)) {
+                markApiDelivered(id)
+                return
+            }
+
+            try {
+                dao.releaseApiFallback(boundedId)
+            } catch (e: Exception) {
+                Log.e(TAG, "API 우회 재시도 상태 초기화 실패 (id=$id)", e)
+            }
+            if (attempt < API_FALLBACK_ATTEMPTS - 1) delay(API_FALLBACK_RETRY_DELAY_MS)
+        }
+        Log.e(TAG, "API 우회 전송 실패: $title (id=$id)")
+    }
+
+    private suspend fun markApiDelivered(id: Long) {
+        if (id <= 0L) return
+        try {
+            AppDatabase.getInstance(applicationContext)
+                .notificationDao()
+                .markAcked(id.coerceAtMost(Int.MAX_VALUE.toLong()).toInt())
+        } catch (e: Exception) {
+            Log.e(TAG, "API 전달 완료 상태 저장 실패 (id=$id)", e)
+        }
+    }
+
+    private suspend fun sendViaApi(
+        packageName: String,
+        title: String,
+        text: String,
+        subText: String
+    ): Boolean {
+        val accepted = TelegramManager.getInstance(applicationContext)
+            .sendNotificationAndAwait(packageName, title, text, subText)
+        if (!accepted) {
+            Log.e(TAG, "API 전달이 확인되지 않았습니다: $title")
+            BleManager.getInstance(applicationContext)
+                .recordFailureLog("Telegram API 알림 전송 실패: ${packageName}")
+        }
+        return accepted
     }
 
     private suspend fun saveToDatabase(packageName: String, title: String, text: String): Long {
@@ -306,11 +325,19 @@ class NotificationListener : NotificationListenerService() {
             db.notificationDao().insert(
                 NotificationEntity(event = "$packageName | $title", msg = text)
             )
-        } catch (e: Exception) { -1L }
+        } catch (e: Exception) {
+            Log.e(TAG, "알림 DB 저장 실패: $packageName | $title", e)
+            BleManager.getInstance(applicationContext)
+                .recordFailureLog("알림 DB 저장 실패: ${e.javaClass.simpleName}")
+            -1L
+        }
     }
 
     companion object {
         private const val TAG = "NotificationListener"
+        private const val API_FALLBACK_ACK_TIMEOUT_MS = 8_000L
+        private const val API_FALLBACK_RETRY_DELAY_MS = 2_000L
+        private const val API_FALLBACK_ATTEMPTS = 2
 
         private val outgoingFilterPackages = setOf(
             "com.kakao.talk",

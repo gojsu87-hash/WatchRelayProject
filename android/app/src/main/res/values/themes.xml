@@ -1,11 +1,46 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.WatchNotify" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/button_filled</item>
+        <item name="colorOnPrimary">@color/button_filled_text</item>
+        <item name="colorSurface">@color/card_background</item>
+        <item name="android:colorBackground">@color/screen_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:navigationBarColor">@color/screen_background</item>
+        <item name="android:statusBarColor">@color/screen_background</item>
     </style>
 
     <style name="Theme.WatchNotify" parent="Base.Theme.WatchNotify" />
+
+    <style name="Widget.WatchNotify.Button.Base" parent="Widget.Material3.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="Widget.WatchNotify.Button.Filled" parent="Widget.WatchNotify.Button.Base">
+        <item name="backgroundTint">@color/button_filled</item>
+        <item name="android:textColor">@color/button_filled_text</item>
+    </style>
+
+    <style name="Widget.WatchNotify.Button.Outlined" parent="Widget.WatchNotify.Button.Base">
+        <item name="strokeColor">@color/card_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="backgroundTint">@color/card_background</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+    <style name="Widget.WatchNotify.Button.Text" parent="Widget.WatchNotify.Button.Base">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
 
     <style name="Theme.WatchNotify.LogFloat" parent="Theme.WatchNotify">
         <item name="android:windowIsFloating">true</item>

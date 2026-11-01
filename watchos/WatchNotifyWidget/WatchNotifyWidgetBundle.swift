@@ -4,6 +4,9 @@ import SwiftUI
 @main
 struct WatchNotifyWidgetBundle: WidgetBundle {
     var body: some Widget {
-        WatchNotifyWidget()
+        WatchNotifyCircularWidget()
+        WatchNotifyCornerWidget()
+        WatchNotifyRectangularWidget()
+        WatchNotifyInlineWidget()
     }
 }

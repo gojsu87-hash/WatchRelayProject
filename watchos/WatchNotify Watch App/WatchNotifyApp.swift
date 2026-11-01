@@ -7,6 +7,9 @@ import UserNotifications
 #if os(watchOS)
 import WatchKit
 #endif
+#if DEBUG
+import HealthKit
+#endif
 
 @main
 struct WatchNotifyApp: App {
@@ -61,17 +64,28 @@ class AppDelegate: NSObject, WKApplicationDelegate, UNUserNotificationCenterDele
         return BLEManagerStore.shared.manager
     }
 
+    #if DEBUG
+    private var workoutSessionManager: WorkoutSessionManager?
+    #endif
+
     // MARK: - 앱 생명주기
 
     func applicationDidFinishLaunching() {
         UNUserNotificationCenter.current().delegate = self
         bleManager?.addLog("📱 앱 시작")
         scheduleNextBackgroundRefresh()
+        #if DEBUG
+        let manager = WorkoutSessionManager(bleManager: bleManager)
+        workoutSessionManager = manager
+        #endif
     }
 
     func applicationDidBecomeActive() {
         bleManager?.addLog("🟢 포그라운드 활성화")
         bleManager?.handleAppActive()
+        #if DEBUG
+        workoutSessionManager?.startIfNeeded()
+        #endif
     }
 
     func applicationWillResignActive() {
@@ -80,6 +94,7 @@ class AppDelegate: NSObject, WKApplicationDelegate, UNUserNotificationCenterDele
 
     func applicationDidEnterBackground() {
         bleManager?.addLog("⚫ 백그라운드 진입")
+        bleManager?.handleAppBackground()
         scheduleNextBackgroundRefresh()
     }
 

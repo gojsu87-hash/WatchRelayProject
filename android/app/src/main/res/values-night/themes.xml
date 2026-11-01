@@ -1,7 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.WatchNotify" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/button_filled</item>
+        <item name="colorOnPrimary">@color/button_filled_text</item>
+        <item name="colorSurface">@color/card_background</item>
+        <item name="android:colorBackground">@color/screen_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:navigationBarColor">@color/screen_background</item>
+        <item name="android:statusBarColor">@color/screen_background</item>
     </style>
 </resources>

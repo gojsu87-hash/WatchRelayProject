@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -77,8 +78,10 @@ class TelegramManager private constructor(private val context: Context) {
         .build()
 
     // ✅ 마지막 전송된 메시지 ID 추적 (중복 방지)
+    private val duplicateLock = Any()
     private var lastSentMessageKey = ""
-    private val DUPLICATE_SEND_WINDOW_MS = 1000L
+    private var lastSentAt = 0L
+    private val duplicateSendWindowMs = 1000L
 
     // 패키지명 + 제목 → 토큰 매핑
     private fun getToken(
@@ -152,46 +155,62 @@ class TelegramManager private constructor(private val context: Context) {
         body: String,
         subText: String = ""
     ) {
+        scope.launch {
+            sendNotificationAndAwait(packageName, title, body, subText)
+        }
+    }
+
+    suspend fun sendNotificationAndAwait(
+        packageName: String,
+        title: String,
+        body: String,
+        subText: String = ""
+    ): Boolean = withContext(Dispatchers.IO) {
         // ✅ 중복 전송 방지
         val messageKey = "$packageName|$title|$body"
         val now = System.currentTimeMillis()
-        if (lastSentMessageKey == messageKey) {
-            Log.d(TAG, "중복 전송 무시: $title")
-            return
-        }
-        lastSentMessageKey = messageKey
-
-        scope.launch {
-            try {
-                val token = getToken(packageName, title, subText)
-
-                // 보낸사람\n내용 형식으로 전송
-                val text = "$title\n$body"
-
-                val json = JSONObject().apply {
-                    put("chat_id", CHAT_ID)
-                    put("text", text)
-                }
-
-                val requestBody = json.toString()
-                    .toRequestBody("application/json".toMediaType())
-
-                val request = Request.Builder()
-                    .url("https://api.telegram.org/bot$token/sendMessage")
-                    .post(requestBody)
-                    .build()
-
-                val response = client.newCall(request).execute()
-
-                if (response.isSuccessful) {
-                    Log.d(TAG, "전송 성공: $title")
-                } else {
-                    Log.e(TAG, "전송 실패: ${response.code} - ${response.body?.string()}")
-                }
-
-            } catch (e: Exception) {
-                Log.e(TAG, "전송 오류: ${e.message}")
+        val isDuplicate = synchronized(duplicateLock) {
+            val duplicate = lastSentMessageKey == messageKey &&
+                now - lastSentAt < duplicateSendWindowMs
+            if (!duplicate) {
+                lastSentMessageKey = messageKey
+                lastSentAt = now
             }
+            duplicate
+        }
+        if (isDuplicate) {
+            Log.d(TAG, "중복 전송 무시: $title")
+            return@withContext false
+        }
+
+        try {
+            val token = getToken(packageName, title, subText)
+            val json = JSONObject().apply {
+                put("chat_id", CHAT_ID)
+                put("text", "$title\n$body")
+            }
+
+            val requestBody = json.toString()
+                .toRequestBody("application/json".toMediaType())
+            val request = Request.Builder()
+                .url("https://api.telegram.org/bot$token/sendMessage")
+                .post(requestBody)
+                .build()
+
+            client.newCall(request).execute().use { response ->
+                val responseText = response.body?.string().orEmpty()
+                val telegramAccepted = response.isSuccessful &&
+                    runCatching { JSONObject(responseText).optBoolean("ok") }.getOrDefault(false)
+                if (telegramAccepted) {
+                    Log.i(TAG, "Telegram 전송 승인: $title")
+                } else {
+                    Log.e(TAG, "Telegram 전송 실패: HTTP ${response.code} - $responseText")
+                }
+                telegramAccepted
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Telegram 전송 오류: $title", e)
+            false
         }
     }
 }

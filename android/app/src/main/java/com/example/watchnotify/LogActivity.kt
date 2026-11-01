@@ -12,6 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class LogActivity : AppCompatActivity() {
 
@@ -50,7 +53,10 @@ class LogActivity : AppCompatActivity() {
                 val text = if (dbLogs.isEmpty()) {
                     "로그 없음"
                 } else {
-                    dbLogs.joinToString("\n") { it.message }
+                    val timeFormat = SimpleDateFormat("MM/dd HH:mm:ss", Locale.getDefault())
+                    dbLogs.joinToString("\n") {
+                        "[${timeFormat.format(Date(it.timestamp))}] ${it.message}"
+                    }
                 }
 
                 withContext(Dispatchers.Main) {

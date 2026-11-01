@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.widget.RemoteViews
-import com.example.watchnotify.ble.BleManager
 
 class WatchNotifyWidget : AppWidgetProvider() {
 
@@ -19,10 +18,11 @@ class WatchNotifyWidget : AppWidgetProvider() {
     }
 
     companion object {
-        fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
-            val bleManager = BleManager.getInstance(context)
-            val battery = bleManager.watchBatteryLevel
+        private const val PREFS_NAME = "watchnotify_widget"
+        private const val KEY_WATCH_BATTERY = "watch_battery_level"
 
+        fun updateWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
+            val battery = getBatteryLevel(context)
             val views = RemoteViews(context.packageName, R.layout.widget_main)
             val widgetBitmap = drawWidget(context, battery)
             views.setImageViewBitmap(R.id.ivWidgetCanvas, widgetBitmap)
@@ -37,6 +37,21 @@ class WatchNotifyWidget : AppWidgetProvider() {
             views.setOnClickPendingIntent(R.id.rootLayout, pendingIntent)
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
+        }
+
+        fun updateBattery(context: Context, batteryLevel: Int) {
+            if (batteryLevel !in 0..100) return
+            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putInt(KEY_WATCH_BATTERY, batteryLevel)
+                .apply()
+            updateAllWidgets(context)
+        }
+
+        fun getBatteryLevel(context: Context): Int {
+            return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .getInt(KEY_WATCH_BATTERY, -1)
+                .takeIf { it in 0..100 } ?: -1
         }
 
         private fun drawWidget(context: Context, battery: Int): Bitmap {

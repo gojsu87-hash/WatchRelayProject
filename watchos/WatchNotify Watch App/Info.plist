@@ -26,10 +26,6 @@
 	<string></string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>애플워치 알림 수신을 위해 블루투스가 필요합니다</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>애플워치 알림 수신을 위해 블루투스가 필요합니다</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>애플워치 알림 수신을 위해 블루투스가 필요합니다</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
